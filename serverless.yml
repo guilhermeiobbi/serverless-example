@@ -1,0 +1,51 @@
+service: lambda-crud-test
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  region: sa-east-1
+  stage: dev
+  #role: arn:aws:iam::111764229625:role/lambda-test
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:sa-east-1:111764229625:table/users"
+
+functions:
+  create:
+    handler: handler.create
+    events:
+     - http:
+         path: user
+         method: post
+  findAll:
+    handler: handler.findAll
+    events:
+      - http:
+          path: user
+          method: get
+  findOne:
+    handler: handler.findOne
+    events:
+      - http:
+          path: user/{id}
+          method: get
+  update:
+    handler: handler.update
+    events:
+      - http:
+          path: user/{id}
+          method: put
+  delete:
+    handler: handler.delete
+    events:
+      - http:
+          path: user/{id}
+          method: delete
