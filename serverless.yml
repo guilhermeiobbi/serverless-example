@@ -5,7 +5,6 @@ provider:
   runtime: nodejs6.10
   region: sa-east-1
   stage: dev
-  #role: arn:aws:iam::111764229625:role/lambda-test
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -16,7 +15,7 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource: "arn:aws:dynamodb:sa-east-1:111764229625:table/users"
+      Resource: "arn:aws:dynamodb:sa-east-1:xxxx:table/users"
 
 functions:
   create:
